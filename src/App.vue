@@ -1,61 +1,79 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <h1>Helloooooooooooooo</h1>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
+    <v-app id="inspire">
+        
+        <!-- Отрисовка навигации -->
+        <Navbar/>      
+
+        <v-content>
+            <!-- Отборажение контента -->
+            <router-view ></router-view>
+            
+            <v-container
+            class="fill-height"
+            fluid
+            >
+            <v-row
+                align="center"
+                justify="center"
+            >
+                <v-col class="text-center">
+                <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                    <v-btn
+                        :href="source"
+                        icon
+                        large
+                        target="_blank"
+                        v-on="on"
+                    >
+                        <v-icon large>mdi-code-tags</v-icon>
+                    </v-btn>
+                    </template>
+                    <span>Source</span>
+                </v-tooltip>
+
+                <v-tooltip right>
+                    <template v-slot:activator="{ on }">
+                    <v-btn
+                        icon
+                        large
+                        href="https://codepen.io/johnjleider/pen/zgxeLQ"
+                        target="_blank"
+                        v-on="on"
+                    >
+                        <v-icon large>mdi-codepen</v-icon>
+                    </v-btn>
+                    </template>
+                    <span>Codepen</span>
+                </v-tooltip>
+                </v-col>
+            </v-row>
+            </v-container>
+        </v-content>
+
+        <v-footer
+            color="blue"
+            app
+        >
+            <span class="white--text">&copy; 2019</span>
+        </v-footer>
+        
+
+    </v-app>
 </template>
 
 <script>
+import Navbar from './components/Navbar.vue'
+
+
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+    name: 'App',
+    props: {
+        source: String,
+    },
+    
+    components: {
+        Navbar
     }
-  }
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
