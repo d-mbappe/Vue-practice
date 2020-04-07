@@ -1,5 +1,5 @@
 <template>
-    <h1>About</h1>
+    <div class="container"><h1>About</h1></div>
     
 </template>
 
@@ -10,5 +10,9 @@ export default {
 </script>
 
 <style scoped>
-
+    .container {
+        margin: 5px;
+        background-color: #c4e1f8;
+        border-radius: 15px;
+    }
 </style>
