@@ -3,7 +3,7 @@
         <v-row>
             <v-col cols="6">
                 <!-- Filter -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Filter</h4>
                     <ul class="d-flex justify-space-between">
                         <li v-for="item in items" :key="item">{{item}}</li>
@@ -12,15 +12,15 @@
                 </div>
 
                 <!-- Upper -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Upper Case</h4>
                     <p> {{text}} </p>
                     <v-btn v-on:click="toUpperCase" color="primary">Upper</v-btn>
                 </div>
                     <!-- Pow -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Square Root</h4>
-                        <v-list dense  color="#c4e1f8" >
+                        <v-list dense  color="#E1F5FE" >
                             <v-list-item-group  color="indigo">
                                 <v-list-item 
                                 @click="pow(index)"
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Enter Age -->
-                <div class="container">
+                <div class="container container-c">
                     <h4 > Age: {{age}} </h4>
                     <v-text-field dense height="20px" type="text" id="itemIput" placeholder="Enter your Age" v-model="age"></v-text-field>
                     <p> Вы:
@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Toggle -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Show/Hide</h4>
                     <v-fab-transition name="showName"> <p v-if="sName" class="m-0"> {{name}} </p> </v-fab-transition>
                     <v-btn v-on:click="toggle()" color="primary"> {{sName?'Hide':'Show'}} </v-btn>
@@ -62,7 +62,7 @@
             </v-col >
             <v-col cols="6">
                 <!--ФИО  -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>ФИО</h4>
                     <v-text-field dense type="text" v-model="fio" placeholder="Введи ФИО"></v-text-field>
                     <v-btn color="primary" v-on:click="separate()" >Separate</v-btn>
@@ -73,21 +73,21 @@
                 </div>
 
                 <!-- Password -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Password</h4>
                     <v-text-field dense :type="type" class="form" placeholder="Enter password"></v-text-field>
                     <v-btn color="primary" @click="togglePass()"> {{show ? 'Hide': 'Show'}} </v-btn>
                 </div>
 
                 <!-- Year -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Year of birth</h4>
                     <v-text-field dense type="text" v-model="year" maxlength="3" placeholder="Enter your Age" ></v-text-field>
                     <p v-if="year != '' ">Ваш год рождения: {{ calcYear(year) }} </p>
                     <p v-else="">Введите возраст...</p>
                 </div>
                 <!-- Form -->
-                <div class="container">
+                <div class="container container-c">
                     <h4>Sum</h4>
                     <v-text-field dense type="text" v-model="num1" placeholder="First number"></v-text-field>
                     <v-text-field dense type="text" v-model="num2" placeholder="Second number"></v-text-field>
@@ -127,7 +127,6 @@
                 }
         },
         
-
         methods: {
             // Filter
             filter: function() {
@@ -201,11 +200,7 @@
     }
 </script>
     
-<style  scoped>
-    .col .container {
-        margin: 5px;
-        background-color: #c4e1f8;
-        border-radius: 15px;
-    }
+<style>
+
     
 </style>

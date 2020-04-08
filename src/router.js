@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 
 import Home from './views/Home.vue'
 import SimpleMethods from './views/SimpleMethods.vue'
+import ChangeData from './views/ChangeData.vue'
+import ChecboxRadio from './views/CheckboxRadio.vue'
 import NotFound from './views/NotFound.vue'
 
 import About from './components/About.vue'
@@ -14,6 +16,8 @@ Vue.use(VueRouter)
 const routes = [
 	{ path: '/', name: 'Home', component: Home},
 	{ path: '/simple-methods', name: 'SimpleMethods', component: SimpleMethods },
+	{ path: '/change-data', name: 'ChangeData', component: ChangeData },
+	{ path: '/checkbox-radio', name: 'ChecboxRadio', component: ChecboxRadio },
 	{ path: '/about', name: 'About', component: About },
 	{ path: '/contact', name: 'Contact', component: Contact },
 	{ path: '*', component: NotFound }
