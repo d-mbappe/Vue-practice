@@ -1,6 +1,6 @@
 <template>
     <v-container>
-        <h4>Check</h4>
+        <h1 class="text-center">Check</h1>
         <!-- Check -->
         <div class="container container-c">
             <v-checkbox  v-model="checked" :label="checked ? 'Hide':'Show'"></v-checkbox>
@@ -62,5 +62,8 @@
 </script>
 
 <style  scoped>
-
+    .container-c {
+        margin: 5px auto;
+        width: 50%;
+    }
 </style>

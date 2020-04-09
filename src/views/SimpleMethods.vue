@@ -20,7 +20,7 @@
                     <!-- Pow -->
                 <div class="container container-c">
                     <h4>Square Root</h4>
-                        <v-list dense  color="#E1F5FE" >
+                        <v-list dense  color="#c4e1f8" >
                             <v-list-item-group  color="indigo">
                                 <v-list-item 
                                 @click="pow(index)"
@@ -28,7 +28,7 @@
                                 :key="index"
                                 >
                                 <v-list-item-icon>
-                                    <v-icon>touch_app</v-icon>
+                                    <v-icon color="blue">touch_app</v-icon>
                                 </v-list-item-icon>
 
                                 <v-list-item-content>
@@ -200,7 +200,7 @@
     }
 </script>
     
-<style>
+<style lang="scss">
 
     
 </style>

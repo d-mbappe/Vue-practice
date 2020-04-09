@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <v-container>
         <!-- Product Basket-->
         <h1>Product Basket <v-icon>shopping_cart</v-icon> </h1> 
         <h3>Click on the cell to edit it</h3>
@@ -73,7 +73,7 @@
                 </v-card-actions>
             </v-card>
         </v-dialog>
-    </div>
+    </v-container>
 </template>
 
 <script>

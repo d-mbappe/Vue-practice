@@ -79,13 +79,12 @@ export default {
 </script>
 
 <style lang="scss" >
-    $container-color:#E1F5FE;
-    $container-color:#E1F5FE;
-    // $container-color:#c4e1f8;
+    // $container-color:#E1F5FE;
+    $container-color:#c4e1f8;
 
     .container-c {
         margin: 5px;
         background-color: $container-color;
-        border-radius: 15px;
+        border-radius: 35px;
     }
 </style>

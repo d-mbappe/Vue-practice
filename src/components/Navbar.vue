@@ -63,6 +63,9 @@ export default {
             {icon: 'code', text: 'Simple Methods', route: '/simple-methods', color:'pink'},
             {icon: 'build', text: 'Change Data', route: '/change-data', color:'orange'},
             {icon: 'check_box', text: 'Checkbox and Radio', route: '/checkbox-radio', color:'green'},
+            {icon: 'list', text: 'Cases Lists', route: '/cases-list', color:'indigo'},
+            {icon: 'live_help', text: 'Tests', route: '/tests', color:'amber'},
+            {icon: 'swap_horiz', text: 'Filters', route: '/filters', color:'red'},
             {icon: '', text: 'About', route: '/about'},
             {icon: '', text: 'Contact', route: '/contact'}
         ]  
