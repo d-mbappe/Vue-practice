@@ -49,8 +49,8 @@
             </tr>
         </v-simple-table>
             <!-- Empty error for inputs -->
-        <v-dialog
-            v-model="dialog"
+        <!-- <v-dialog
+            v-model="showDialog"
             max-width="290"
         >
             <v-card>
@@ -66,20 +66,22 @@
                 <v-btn
                     color="green darken-1"
                     text
-                    @click="dialog = false"
+                    @click="showDialog = false"
                 >
                     Agree
                 </v-btn>
                 </v-card-actions>
             </v-card>
-        </v-dialog>
+        </v-dialog> -->
+    <Dialog :show="showDialog" @changeMessage="changeMessage"></Dialog>
     </v-container>
 </template>
 
 <script>
+import Dialog from '../components/Dialog'
     export default {
         name:'product-basket',
-        
+        components: {Dialog},
 
         data: function() {
             return {
@@ -94,17 +96,23 @@
                 editingPrice: false,
                 editingQuantity: false,
 
-                dialog:false
+                showDialog: false
             }
         },
         
         computed: {
             onePrice: function() {
                 return product.quantity*product.price
-            }
+            },
+
         },
 
         methods: {
+     
+            // changeShow: function() {
+            //     this.$emit('changeShow', !this.show)
+            // },
+
             productPrice: function() {
 
             var textElems = document.getElementsByClassName("oncePrice");
@@ -135,7 +143,7 @@
                     price.value = "";
                     quant.value = "";
                 } else {
-                    this.dialog = true
+                    this.showDialog = !this.showDialog
                 }
             },
             productPriceClick: function() {

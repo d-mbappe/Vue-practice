@@ -20,13 +20,38 @@
                 </v-list>
             </div>
 
-                <div class="d-flex mt-5 task-input">
-                    <v-text-field rounded outlined dense background-color="#fff" color="blue" label="New Task"    v-model="newTask" @keyup.enter="addTask()" ></v-text-field> 
-                    <v-btn @click="addTask" class="success ml-7" >
-                        Add <v-icon>add</v-icon>
-                    </v-btn>
-                </div>
+            <div class="d-flex mt-5 task-input">
+                <v-text-field rounded outlined dense background-color="#fff" color="blue" label="New Task"    v-model="newTask" @keyup.enter="addTask()" ></v-text-field> 
+                <v-btn @click="addTask" class="success ml-7" >
+                    Add <v-icon>add</v-icon>
+                </v-btn>
+            </div>
 
+            <!-- Empty error for inputs -->
+            <v-dialog
+                v-model="dialog"
+                max-width="290"
+            >
+                <v-card>
+                    <v-card-title class="headline">Empty value</v-card-title>
+
+                    <v-card-text>
+                    Fill in the input field
+                    </v-card-text>
+
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+
+                    <v-btn
+                        color="green darken-1"
+                        text
+                        @click="dialog = false"
+                    >
+                        Agree
+                    </v-btn>
+                    </v-card-actions>
+                </v-card>
+            </v-dialog>
         </div>
     </v-container>
 </template>
@@ -48,18 +73,24 @@
                 },
                 newTask:'',
                 changeTask: false,
+
+                dialog: false
             }
         },
 
         methods: {
             addTask: function(value) {
-                value = this.newTask;
-                this.taskList.push({
-                text: value,
-                checkedTask:false,
-                changeTask: false
-            }),
-                this.newTask = ''
+                if(value == '') {
+                    value = this.newTask;
+                    this.taskList.push({
+                    text: value,
+                    checkedTask:false,
+                    changeTask: false
+                    }),
+                    this.newTask = ''
+                } else {
+                    this.dialog = true;
+                }
             },
 
             deleteTask: function(index) {

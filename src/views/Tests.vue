@@ -1,20 +1,26 @@
 <template>
     <v-container>
+
         <!-- Test -->
         <div class="container container-c">
             <h1 class="text-center">Test</h1>
-            <ul v-for="(questionItem,index) in testQuestions" :key="index">
+
+            <u v-for="(questionItem,index) in testQuestions" :key="index">
                 <li> {{questionItem.question}} </li>
                 <p v-if="questionItem.checkedAnswer == true"  style="margin: 0; color: green">Правильный ответ </p>
                 <p v-if="questionItem.checkedAnswer == false" style="margin: 0; color: red ">Неправильный ответ </p>
-            <input с
-                outlined 
-                class="userAnswer "
+                <v-text-field
+                        outlined 
+                        dense
+                        class="userAnswer"
+                        :color="(questionItem.checkedAnswer == true) ? rightAnswer :
+                                                        (questionItem.checkedAnswer == false) ? wrongAnswer :
+                                                        null "
+                        :disabled="questionItem.checkedAnswer"
+                        @keyup.enter="checkingAnswer(index)">
+                </v-text-field>
                 
-                :disabled="questionItem.checkedAnswer"
-                @keyup.enter="checkingAnswer(index)">
-                
-            </ul>
+            </u>
         </div>
 
         <!-- Test (Radio BTN) -->
@@ -24,24 +30,24 @@
                 <div class="question-item" v-for="(questionI,index) in radioTest" :key="index">
                 
                     
-                    <p v-if="questionI.selectedAnswer == '' " style="text-decoration: underline"> 
+                    <p v-if="questionI.selectedAnswer == '' " style="text-decoration: none"> 
                         {{questionI.question}}
                     </p>
                     <p v-else
                     v-bind:style= " (questionI.selectedAnswer == radioTest[index].right) ? rightAnswerRadio : wrongAnswerRadio"> 
                         {{questionI.question}}
                         </p>
-                    
-    
-                    <template v-for="(answer, index) in radioTest[index].answers">
-                        <v-radio
-                        v-bind:value="index + 1"
-                        v-model="questionI.selectedAnswer"
-                        style="padding: 5px;"
-                        :key="index"
-                        ></v-radio> 
-                        <label style="padding-right: 20px;" :key="answer"> {{answer}}</label>
-                    </template>
+                        
+                        <v-radio-group  v-model="questionI.selectedAnswer">
+                            <v-radio 
+                            :disabled="questionI.selectedAnswer !== ''"
+                            v-for="(answer, index) in radioTest[index].answers"
+                            :key="index"
+                            v-bind:value="index + 1"
+                            :label="answer"
+                            ></v-radio> 
+                        </v-radio-group>       
+                        <p class="font-italic font-weight-light">Right answer: {{questionI.right}}</p>              
     
                 </div>
             </div>
@@ -66,7 +72,6 @@
     
             <a v-if="index < MultiCheckTest.length -1" href="" @click.prevent="all">Следующий вопрос -> {{index + 2}}</a>
             <a v-if="index == MultiCheckTest.length -1" href="#" @click.prevent="all">Показать pезультат </a> 
-            <!-- <p>  {{answersArray}}</p> -->
             <p> <b> Правильных ответов:</b> {{rightMultiAnswers}}</p>
         </div>
     </v-container>
@@ -78,6 +83,7 @@
 
         data: function() {
             return {
+                red: 'white',
                 testQuestions: [
             {
                 question: 'Вопрос 1',
@@ -98,6 +104,9 @@
             },
         ],
 
+        rightAnswer: 'success',
+        wrongAnswer: 'error',
+
         // rightAnswer: {
         //     outline : '2px solid green',
         //     color: '#ccc'
@@ -106,12 +115,10 @@
         // wrongAnswer: {
         //     outline : '2px solid red'
         // },
-        rightAnswer: 'success',
-        wrongAnswer: 'error',
+        // defaultStyle: {
+        //     border: 'none'
+        // },
 
-        defaultStyle: {
-            border: 'none'
-        },
 
         // Radio Test
         radioTest: [
@@ -215,16 +222,21 @@
         },
 
         methods: {
+
             checkingAnswer: function(index) {
-            let userAnswer = document.getElementsByClassName('userAnswer')[index],
+            let userElem = document.getElementsByClassName('userAnswer')[index],
+                userAnswer = userElem.querySelector('input'),
                 answer = this.testQuestions[index].answer;
-            
+                
             if (answer == userAnswer.value){
                 this.testQuestions[index].checkedAnswer = true;
+                console.log(userAnswer.value)
+
                 
             } else {
                 this.testQuestions[index].checkedAnswer = false;
                 userAnswer.value = ''
+                console.log(userAnswer.value)
             }
             
         },
@@ -267,8 +279,12 @@
 </script>
 
 <style lang="scss" scoped>
-.container-c {
-    margin: 5px auto;
-    width: 50%;
+    .container-c {
+        margin: 5px auto;
+        width: 50%;
+    }
+
+    li {
+        list-style: none;
     }
 </style>

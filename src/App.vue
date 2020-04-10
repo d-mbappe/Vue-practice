@@ -57,6 +57,32 @@
         >
             <span class="white--text">&copy; 2019</span>
         </v-footer>
+
+        <!-- Empty error for inputs -->
+        <!-- <v-dialog
+            v-model="dialog"
+            max-width="290"
+        >
+            <v-card>
+                <v-card-title class="headline">Empty value</v-card-title>
+
+                <v-card-text>
+                Fill in all the information about the product.
+                </v-card-text>
+
+                <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                    color="green darken-1"
+                    text
+                    @click="dialog = false"
+                >
+                    Agree
+                </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog> -->
         
 
     </v-app>
