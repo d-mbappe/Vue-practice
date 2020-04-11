@@ -32,16 +32,24 @@
                         </div>
                     
                 </div>
-            </div> 
-
+            </div>
             
         </div> 
+        <div v-if="showDialog">
+                <Dialog v-model="showDialog">
+                    <p slot="title">Empty value</p>
+                    <p slot="content">This field cannot be empty</p>
+                </Dialog>
+        </div>
     </v-container>
 </template>
 
 <script>
+import Dialog from './Dialog'
+
     export default {
         name: 'Notepad',
+        components: {Dialog},
 
         data: function() {
             return {
@@ -53,65 +61,70 @@
                 ],
 
                 oneNote:'',
+
+                showDialog: false // for component Dialog
             }
         },
 
         methods: {
+            change: function(value) {
+                this.showDialog = value; // for component Dialog
+            },
             // Notepad
-        addNote: function(value) {
-            let fMonth;
+            addNote: function(value) {
+                let fMonth;
 
-            if (this.oneNote == '') {
-                alert ('The entry cannot be empty');
-            } else {
-                value = this.oneNote;
-                let currDate = new Date(),
-                    Year = currDate.getFullYear(),
-                    Month = currDate.getMonth(),
-                    Day = currDate.getDate(),
-                    Hour = currDate.getHours(),
-                    Minutes = currDate.getMinutes();
+                if (this.oneNote == '') {
+                    this.showDialog = !this.showDialog // for component Dialog
+                } else {
+                    value = this.oneNote;
+                    let currDate = new Date(),
+                        Year = currDate.getFullYear(),
+                        Month = currDate.getMonth(),
+                        Day = currDate.getDate(),
+                        Hour = currDate.getHours(),
+                        Minutes = currDate.getMinutes();
 
-                    if(Minutes < 10) {
-                        Minutes = '0' + Minutes; 
+                        if(Minutes < 10) {
+                            Minutes = '0' + Minutes; 
+                        }
+
+                    switch (Month)
+                    {
+                    case 0: fMonth="января"; break;
+                    case 1: fMonth="февраля"; break;
+                    case 2: fMonth="марта"; break;
+                    case 3: fMonth="апреля"; break;
+                    case 4: fMonth="мае"; break;
+                    case 5: fMonth="июня"; break;
+                    case 6: fMonth="июля"; break;
+                    case 7: fMonth="августа"; break;
+                    case 8: fMonth="сентября"; break;
+                    case 9: fMonth="октября"; break;
+                    case 10: fMonth="ноября"; break;
+                    case 11: fMonth="декабря"; break;
                     }
 
-                switch (Month)
-                {
-                case 0: fMonth="января"; break;
-                case 1: fMonth="февраля"; break;
-                case 2: fMonth="марта"; break;
-                case 3: fMonth="апреля"; break;
-                case 4: fMonth="мае"; break;
-                case 5: fMonth="июня"; break;
-                case 6: fMonth="июля"; break;
-                case 7: fMonth="августа"; break;
-                case 8: fMonth="сентября"; break;
-                case 9: fMonth="октября"; break;
-                case 10: fMonth="ноября"; break;
-                case 11: fMonth="декабря"; break;
+                    this.noteList.push({
+                        noteText: value,
+                        noteDate: Hour + ':' + Minutes + ', ' +  Day + ' ' + fMonth + ' '  +  Year + ' год',
+                    });
+
+                    this.oneNote = ''
                 }
 
-                this.noteList.push({
-                    noteText: value,
-                    noteDate: Hour + ':' + Minutes + ', ' +  Day + ' ' + fMonth + ' '  +  Year + ' год',
-                });
+            },
 
+            removeNote: function(index) {
+                this.noteList.splice( index, 1);
                 this.oneNote = ''
-            }
 
-        },
+            },
 
-        removeNote: function(index) {
-            this.noteList.splice( index, 1);
-            this.oneNote = ''
-
-        },
-
-        showNote: function(index) {
-            let oldNote = this.noteList[index].noteText;
-            this.oneNote = 'Запись: ' + oldNote;
-        },
+            showNote: function(index) {
+                let oldNote = this.noteList[index].noteText;
+                this.oneNote = 'Запись: ' + oldNote;
+            },
         }
     }
 </script>

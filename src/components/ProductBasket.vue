@@ -48,37 +48,21 @@
                 </td> 
             </tr>
         </v-simple-table>
-            <!-- Empty error for inputs -->
-        <!-- <v-dialog
-            v-model="showDialog"
-            max-width="290"
-        >
-            <v-card>
-                <v-card-title class="headline">Empty value</v-card-title>
-
-                <v-card-text>
-                Fill in all the information about the product.
-                </v-card-text>
-
-                <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn
-                    color="green darken-1"
-                    text
-                    @click="showDialog = false"
-                >
-                    Agree
-                </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog> -->
-    <Dialog :show="showDialog" @changeMessage="changeMessage"></Dialog>
+        <!-- Empty error for inputs -->
+        <div v-if="showDialog">
+            <!-- <Dialog :show="showDialog" @showChange="change()"> -->
+            <Dialog v-model="showDialog">
+                <p slot="title">Empty value</p>
+                <p slot="content">Fill in all fields for the product</p>
+            </Dialog>
+        </div>
+    
     </v-container>
 </template>
 
 <script>
 import Dialog from '../components/Dialog'
+
     export default {
         name:'product-basket',
         components: {Dialog},
@@ -96,7 +80,7 @@ import Dialog from '../components/Dialog'
                 editingPrice: false,
                 editingQuantity: false,
 
-                showDialog: false
+                showDialog: false // for component Dialog
             }
         },
         
@@ -108,10 +92,9 @@ import Dialog from '../components/Dialog'
         },
 
         methods: {
-     
-            // changeShow: function() {
-            //     this.$emit('changeShow', !this.show)
-            // },
+            change: function(value) {
+                this.showDialog = value; // for component Dialog
+            },
 
             productPrice: function() {
 
@@ -143,7 +126,7 @@ import Dialog from '../components/Dialog'
                     price.value = "";
                     quant.value = "";
                 } else {
-                    this.showDialog = !this.showDialog
+                    this.showDialog = !this.showDialog // for component Dialog
                 }
             },
             productPriceClick: function() {

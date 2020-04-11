@@ -1,14 +1,16 @@
 <template>
     <!-- Empty error for inputs -->
             <v-dialog
-                v-model="show"
+                v-model="showDialog"
                 max-width="290"
             >
                 <v-card>
-                    <v-card-title class="headline">Empty value</v-card-title>
+                    <v-card-title class="headline">
+                        <slot name="title"></slot>
+                    </v-card-title>
 
                     <v-card-text>
-                    Fill in all the information about the product.
+                    <slot name="content"></slot>
                     </v-card-text>
 
                     <v-card-actions>
@@ -17,7 +19,7 @@
                     <v-btn
                         color="green darken-1"
                         text
-                        @click="show = false"
+                        @click="$emit('input', false)"
                     >
                         Agree
                     </v-btn>
@@ -30,31 +32,24 @@
     export default {
 
         props: {
-            show: {
+            value: {
                 type: Boolean,
                 default: false
             }
         },
+        data: function() {
+            return {
+                showDialog:  this.value 
+            }
+        },
 
 
-
-        // methods: {
-        //     change(){
-        //     this.show = !this.show
+        methods: {
+        //     onChange(){
+        //     // this.$emit('showChange', this.show)
+        //     this.$emit('input', false)
         // }
-        // }
-        // watch: { 
-        //     show: function(newVal, oldVal) { // watch it
-        //     console.log('Prop changed: ', newVal, ' | was: ', oldVal)
-        //     },
-        // },
-        // data: function() {
-        //     return {
-        //         show: this.show,
-
-        //     }
-        // },
-
+        }
     }
 
 </script>

@@ -5,8 +5,8 @@
         <div class="container container-c">
             <h1 class="text-center">Test</h1>
 
-            <u v-for="(questionItem,index) in testQuestions" :key="index">
-                <li> {{questionItem.question}} </li>
+            <div v-for="(questionItem,index) in testQuestions" :key="index">
+                <h4> {{questionItem.question}} </h4>
                 <p v-if="questionItem.checkedAnswer == true"  style="margin: 0; color: green">Правильный ответ </p>
                 <p v-if="questionItem.checkedAnswer == false" style="margin: 0; color: red ">Неправильный ответ </p>
                 <v-text-field
@@ -20,7 +20,7 @@
                         @keyup.enter="checkingAnswer(index)">
                 </v-text-field>
                 
-            </u>
+            </div>
         </div>
 
         <!-- Test (Radio BTN) -->
@@ -30,13 +30,13 @@
                 <div class="question-item" v-for="(questionI,index) in radioTest" :key="index">
                 
                     
-                    <p v-if="questionI.selectedAnswer == '' " style="text-decoration: none"> 
+                    <h4 v-if="questionI.selectedAnswer == '' " style="text-decoration: none"> 
                         {{questionI.question}}
-                    </p>
-                    <p v-else
+                    </h4>
+                    <h4 v-else
                     v-bind:style= " (questionI.selectedAnswer == radioTest[index].right) ? rightAnswerRadio : wrongAnswerRadio"> 
                         {{questionI.question}}
-                        </p>
+                    </h4>
                         
                         <v-radio-group  v-model="questionI.selectedAnswer">
                             <v-radio 
@@ -57,7 +57,7 @@
         <!-- Test (Multi Check) -->
         <div class="container container-c">
             <h1 class="text-center">Test Multi Check</h1>
-            <h5> {{MultiCheckTest[index].question}} </h5>           
+            <h4> {{MultiCheckTest[index].question}} </h4>           
                 <template v-for="(answerMulti, index) in MultiCheckTest[index].answers" >
                             <v-checkbox
                             v-bind:value="index + 1"

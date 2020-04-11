@@ -25,40 +25,24 @@
                 <v-btn @click="addTask" class="success ml-7" >
                     Add <v-icon>add</v-icon>
                 </v-btn>
-            </div>
+            </div>            
+        </div>
 
-            <!-- Empty error for inputs -->
-            <v-dialog
-                v-model="dialog"
-                max-width="290"
-            >
-                <v-card>
-                    <v-card-title class="headline">Empty value</v-card-title>
-
-                    <v-card-text>
-                    Fill in the input field
-                    </v-card-text>
-
-                    <v-card-actions>
-                    <v-spacer></v-spacer>
-
-                    <v-btn
-                        color="green darken-1"
-                        text
-                        @click="dialog = false"
-                    >
-                        Agree
-                    </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
+        <!-- Empty error for inputs -->
+        <div v-if="showDialog">
+            <Dialog v-model="showDialog">
+                <p slot="title">Empty value</p>
+                <p slot="content">This field cannot be empty</p>
+            </Dialog>
         </div>
     </v-container>
 </template>
 
 <script>
+import Dialog from './Dialog'
     export default {
         name: 'ToDo',
+        components: {Dialog},
 
         data: function() {
             return {
@@ -74,11 +58,15 @@
                 newTask:'',
                 changeTask: false,
 
-                dialog: false
+                showDialog: false // for component Dialog
             }
         },
 
         methods: {
+            change: function(value) {
+                this.showDialog = value; // for component Dialog
+            },
+
             addTask: function(value) {
                 if(value == '') {
                     value = this.newTask;
@@ -89,7 +77,7 @@
                     }),
                     this.newTask = ''
                 } else {
-                    this.dialog = true;
+                    this.showDialog = ! this.showDialog  // for component Dialog
                 }
             },
 
