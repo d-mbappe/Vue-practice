@@ -55,34 +55,9 @@
             color="blue"
             app
         >
-            <span class="white--text">&copy; 2019</span>
+            <span class="white--text">&copy; 2020</span>
         </v-footer>
 
-        <!-- Empty error for inputs -->
-        <!-- <v-dialog
-            v-model="dialog"
-            max-width="290"
-        >
-            <v-card>
-                <v-card-title class="headline">Empty value</v-card-title>
-
-                <v-card-text>
-                Fill in all the information about the product.
-                </v-card-text>
-
-                <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn
-                    color="green darken-1"
-                    text
-                    @click="dialog = false"
-                >
-                    Agree
-                </v-btn>
-                </v-card-actions>
-            </v-card>
-        </v-dialog> -->
         
 
     </v-app>
@@ -100,13 +75,42 @@ export default {
     
     components: {
         Navbar
+    }, 
+
+    filters: {
+        numFormat: function(str) {
+                str = str.split('').reverse();
+
+                let newNumber = [],
+                    count = 0;
+
+                for (let i=0; i<str.length; i++){
+                    count++;
+
+                    if(count < 3) {
+                        newNumber.push(str[i]);
+                    } else {
+                        count = 0;
+                        newNumber.push(str[i] + ' ');
+                    }
+                }
+                return newNumber.join('').split('').reverse().join('');
+            },
     }
+
 }
 </script>
 
-<style lang="scss" >
+<style lang="scss">
     // $container-color:#E1F5FE;
     $container-color:#c4e1f8;
+    a {
+        text-decoration: none;
+    }
+
+    li {
+        list-style: none;
+    }
 
     .container-c {
         margin: 5px;

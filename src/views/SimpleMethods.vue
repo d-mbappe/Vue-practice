@@ -4,7 +4,7 @@
             <v-col cols="6">
                 <!-- Filter -->
                 <div class="container container-c">
-                    <h4>Filter</h4>
+                    <h4>Filter (less than 10)</h4>
                     <ul class="d-flex justify-space-between">
                         <li v-for="item in items" :key="item">{{item}}</li>
                     </ul>
@@ -109,7 +109,7 @@
             
             return {
                 items: [1,4,    20,3,40,6,8,],
-                text: 'пришла весна пошли домой',
+                text: 'hello beautiful  and amazing world',
                 nums: [5,3,4,1,76],
                 sName: true,
                 name: 'Dan',

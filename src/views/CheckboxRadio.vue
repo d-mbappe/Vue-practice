@@ -26,7 +26,7 @@
                 <v-radio value="ua" label="UA" color="orange"></v-radio>
             </v-radio-group>
     
-            <p >Вы выбрали: {{ lang }}</p>
+            <p >You have chosen: {{ lang }}</p>
             <p v-if="lang == 'en' ">Thank you very much</p>
             <p v-else-if="lang == 'ru' ">Большое спасибо</p>
             <p v-else-if="lang == 'ua' ">Дуже дякую</p>
@@ -38,8 +38,8 @@
         </div>
 
         <div class="container container-c">
-            <v-checkbox   v-model="colorText" true-value="red" false-value="blue" label="Change color"></v-checkbox>
-            <p v-bind:style="{ color: colorText }">Абзац {{colorText}} </p>
+            <v-switch   v-model="colorText" true-value="red" false-value="blue" label="Change color"></v-switch>
+            <p v-bind:style="{ color: colorText }"> {{colorText}} </p>
         </div>
         
     </v-container>
@@ -61,7 +61,7 @@
     }
 </script>
 
-<style  scoped>
+<style lang="scss" scoped>
     .container-c {
         margin: 5px auto;
         width: 50%;

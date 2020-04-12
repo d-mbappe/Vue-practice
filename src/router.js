@@ -9,10 +9,8 @@ import CasesList from './views/CasesList.vue'
 import ChecboxRadio from './views/CheckboxRadio.vue'
 import Tests from './views/Tests.vue'
 import Filters from './views/Filters.vue'
-import NotFound from './views/NotFound.vue'
 
-import About from './components/About.vue'
-import Contact from './components/Contact.vue'
+import NotFound from './views/NotFound.vue'
 
 
 Vue.use(VueRouter)
@@ -24,8 +22,7 @@ const routes = [
 	{ path: '/cases-list', name: 'CasesList', component: CasesList },
 	{ path: '/tests', name: 'Test', component: Tests },
 	{ path: '/filters', name: 'Filters', component: Filters },
-	{ path: '/about', name: 'About', component: About },
-	{ path: '/contact', name: 'Contact', component: Contact },
+
 	{ path: '*', component: NotFound }
 ];
 

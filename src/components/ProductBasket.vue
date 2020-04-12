@@ -38,8 +38,8 @@
             <tr> 
                 <th colspan="3" >
                     <v-alert type="success" dense class="mt-4" >
-                        <span  class="title">Total: {{allPrice}} </span>
-                        <span v-if=" allPrice !== '' ">₽</span>
+                        <span  class="title">Total:  </span> 
+                        <span v-if=" allPrice !== '' "> {{allPrice}} ₽</span>
                     </v-alert>
                 </th>
                 <td>
@@ -50,7 +50,6 @@
         </v-simple-table>
         <!-- Empty error for inputs -->
         <div v-if="showDialog">
-            <!-- <Dialog :show="showDialog" @showChange="change()"> -->
             <Dialog v-model="showDialog">
                 <p slot="title">Empty value</p>
                 <p slot="content">Fill in all fields for the product</p>
@@ -69,6 +68,7 @@ import Dialog from '../components/Dialog'
 
         data: function() {
             return {
+                t: '11111111111',
                 productBasket: [
                     {name: 'Milk', price: 50, quantity: 2, editing:false},
                     {name: 'Meat', price: 250, quantity: 3, editing:false},
@@ -83,31 +83,8 @@ import Dialog from '../components/Dialog'
                 showDialog: false // for component Dialog
             }
         },
-        
-        computed: {
-            onePrice: function() {
-                return product.quantity*product.price
-            },
-
-        },
 
         methods: {
-            change: function(value) {
-                this.showDialog = value; // for component Dialog
-            },
-
-            productPrice: function() {
-
-            var textElems = document.getElementsByClassName("oncePrice");
-            let allPrice = 0;
-            for (var i = 0; i < textElems.length; i++) {
-                allPrice = allPrice + +textElems[i].innerText;
-                console.log(allPrice );
-            }
-            this.allPrice = allPrice;
-
-            },
-
             addProduct: function() {
                 let name = document.getElementById('name');
                 let price = document.getElementById('price');
@@ -133,11 +110,10 @@ import Dialog from '../components/Dialog'
 
                 var textElems = document.getElementsByClassName("oncePrice");
                 let allPrice = 0;
-                for (var i = 0; i < textElems.length; i++) {
-                    allPrice = allPrice + +textElems[i].innerText;
-                    console.log(allPrice );
+                for (let i = 0; i < textElems.length; i++) {
+                    allPrice = +allPrice + +textElems[i].innerText;
                 }
-                this.allPrice = allPrice;
+                this.allPrice = this.$options.filters.numFormat(allPrice); // use global filter
 
             },
 

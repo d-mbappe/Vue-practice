@@ -7,8 +7,8 @@
 
             <div v-for="(questionItem,index) in testQuestions" :key="index">
                 <h4> {{questionItem.question}} </h4>
-                <p v-if="questionItem.checkedAnswer == true"  style="margin: 0; color: green">Правильный ответ </p>
-                <p v-if="questionItem.checkedAnswer == false" style="margin: 0; color: red ">Неправильный ответ </p>
+                <p v-if="questionItem.checkedAnswer == true"  style="margin: 0; color: green">Правильно </p>
+                <p v-if="questionItem.checkedAnswer == false" style="margin: 0; color: red ">Неправильно</p>
                 <v-text-field
                         outlined 
                         dense
@@ -19,6 +19,7 @@
                         :disabled="questionItem.checkedAnswer"
                         @keyup.enter="checkingAnswer(index)">
                 </v-text-field>
+                <p class="font-italic font-weight-light">Правильный ответ: {{questionItem.answer}} </p>
                 
             </div>
         </div>
@@ -57,32 +58,51 @@
         <!-- Test (Multi Check) -->
         <div class="container container-c">
             <h1 class="text-center">Test Multi Check</h1>
-            <h4> {{MultiCheckTest[index].question}} </h4>           
-                <template v-for="(answerMulti, index) in MultiCheckTest[index].answers" >
+            <h4> {{multiCheckTest[index].question}} </h4>           
+                <v-list v-for="(answerMulti, index) in multiCheckTest[index].answers" :key="index" color="#c4e1f8">
+                    <v-list-item >
                             <v-checkbox
-                            v-bind:value="index + 1"
-                            v-model="answersArray"
-                            :key="index"
+                                :value="index + 1"
+                                v-model="answersArray"
+                                :key="index"
                             ></v-checkbox>
                         
-                        <label for="" style="padding-right: 20px;" :key="answerMulti"> {{answerMulti}}</label>
-                        
-                </template>
+                        <v-list-item-title for="" style="padding-right: 20px;" :key="answerMulti">
+                            {{answerMulti}}
+                        </v-list-item-title>
+                    </v-list-item>                        
+                </v-list>
+                <p class="font-italic font-weight-light">Right answers: {{multiCheckTest[index].right}} </p>           
+
             
     
-            <a v-if="index < MultiCheckTest.length -1" href="" @click.prevent="all">Следующий вопрос -> {{index + 2}}</a>
-            <a v-if="index == MultiCheckTest.length -1" href="#" @click.prevent="all">Показать pезультат </a> 
-            <p> <b> Правильных ответов:</b> {{rightMultiAnswers}}</p>
+            <a v-if="index < multiCheckTest.length -1" href="" @click.prevent="all">Следующий вопрос -> {{index + 2}}</a>
+            <div v-if="index == multiCheckTest.length -1">
+                <a  href="#" @click.prevent="all">Показать pезультат </a>
+                <v-btn class="d-block mt-2" @click="restart">Restart</v-btn>
+            </div> 
+            <!-- <p> <b> Правильных ответов:</b> {{rightMultiAnswers}}</p> -->
+        </div>
+
+        <div v-if="showDialog">
+            <Dialog v-model="showDialog">
+                <p slot="title">Results</p>
+                <p slot="content">Right answers: {{rightMultiAnswers}}</p>
+            </Dialog>
         </div>
     </v-container>
 </template>
 
 <script>
+import Dialog from '../components/Dialog'
+
     export default {
         name: 'Test',
+        components: {Dialog},
 
         data: function() {
             return {
+                showDialog: false,
                 red: 'white',
                 testQuestions: [
             {
@@ -106,18 +126,6 @@
 
         rightAnswer: 'success',
         wrongAnswer: 'error',
-
-        // rightAnswer: {
-        //     outline : '2px solid green',
-        //     color: '#ccc'
-        // },
-
-        // wrongAnswer: {
-        //     outline : '2px solid red'
-        // },
-        // defaultStyle: {
-        //     border: 'none'
-        // },
 
 
         // Radio Test
@@ -177,7 +185,7 @@
         },
 
         // Test Multi Check
-        MultiCheckTest: [
+        multiCheckTest: [
             {
                 question: 'Вопрос 1',
                 answers: [
@@ -216,7 +224,7 @@
         ],
 
         answersArray:[],
-        index: 0 ,
+        index: 0,
         rightMultiAnswers: 0,
             }
         },
@@ -242,19 +250,19 @@
         },
 
         nextQuestion: function() {
-            let length = this.MultiCheckTest.length;
+            let length = this.multiCheckTest.length;
 
             if(this.index < length -1) {
                 this.index += 1;
             } else {
-                alert('Правильных ответов: ' + this.rightMultiAnswers)
+                this.showDialog = !this.showDialog
             }
             this.answersArray = []
         },
 
         checkingMultiAnswer: function() {
 
-            let currQuestion = this.MultiCheckTest[this.index];
+            let currQuestion = this.multiCheckTest[this.index];
             let right = 0;
 
             for(let i=0; i<this.answersArray.length; i++) {
@@ -274,6 +282,10 @@
             this.checkingMultiAnswer();
             this.nextQuestion();
         },
+
+        restart: function() {
+            this.index = 0
+        }
         }
     }
 </script>
@@ -284,7 +296,4 @@
         width: 50%;
     }
 
-    li {
-        list-style: none;
-    }
 </style>

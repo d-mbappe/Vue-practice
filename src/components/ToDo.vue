@@ -63,17 +63,13 @@ import Dialog from './Dialog'
         },
 
         methods: {
-            change: function(value) {
-                this.showDialog = value; // for component Dialog
-            },
-
             addTask: function(value) {
-                if(value == '') {
+                if(this.newTask !== '') {
                     value = this.newTask;
                     this.taskList.push({
-                    text: value,
-                    checkedTask:false,
-                    changeTask: false
+                        text: value,
+                        checkedTask:false,
+                        changeTask: false
                     }),
                     this.newTask = ''
                 } else {

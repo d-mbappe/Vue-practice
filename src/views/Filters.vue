@@ -22,6 +22,8 @@
 
 <script>
     export default {
+
+        
         name: 'Filters',
 
         data: function() {
@@ -33,40 +35,40 @@
         },
 
         filters: {
-        uppercase: function(str) {
-            return str.toUpperCase();
-        },
-        capitalizeWords: function(str) {
-            str = str.split(' ');
-            var newStr =  [];
-            for (let i=0; i<str.length; i++){
-                newStr.push(str[i].substr(0,1).toUpperCase() + str[i].slice(1) ) ;
-            }
-            
-            return newStr.join(' ') ;      
-        },
-        formatDate: function(str) {
-            str = str.split('-').reverse().join('.')
-            return str;
-        },
-        numFormat: function(str) {
-            str = str.split('').reverse();
-
-            let newNumber = [],
-                count = 0;
-
-            for (let i=0; i<str.length; i++){
-                count++;
-
-                if(count < 3) {
-                    newNumber.push(str[i]);
-                } else {
-                    count = 0;
-                    newNumber.push(str[i] + ' ');
+            uppercase: function(str) {
+                return str.toUpperCase();
+            },
+            capitalizeWords: function(str) {
+                str = str.split(' ');
+                var newStr =  [];
+                for (let i=0; i<str.length; i++){
+                    newStr.push(str[i].substr(0,1).toUpperCase() + str[i].slice(1) ) ;
                 }
-            }
-            return newNumber.join('').split('').reverse().join('');
-        },
+                
+                return newStr.join(' ') ;      
+            },
+            formatDate: function(str) {
+                str = str.split('-').reverse().join('.')
+                return str;
+            },
+            // numFormat: function(str) {
+            //     str = str.split('').reverse();
+
+            //     let newNumber = [],
+            //         count = 0;
+
+            //     for (let i=0; i<str.length; i++){
+            //         count++;
+
+            //         if(count < 3) {
+            //             newNumber.push(str[i]);
+            //         } else {
+            //             count = 0;
+            //             newNumber.push(str[i] + ' ');
+            //         }
+            //     }
+            //     return newNumber.join('').split('').reverse().join('');
+            // },
     },
     }
 </script>

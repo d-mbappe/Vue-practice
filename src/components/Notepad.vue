@@ -36,10 +36,10 @@
             
         </div> 
         <div v-if="showDialog">
-                <Dialog v-model="showDialog">
-                    <p slot="title">Empty value</p>
-                    <p slot="content">This field cannot be empty</p>
-                </Dialog>
+            <Dialog v-model="showDialog">
+                <p slot="title">Empty value</p>
+                <p slot="content">This field cannot be empty</p>
+            </Dialog>
         </div>
     </v-container>
 </template>
@@ -130,9 +130,10 @@ import Dialog from './Dialog'
 </script>
 
 <style lang="scss" scoped>
+
 .v-list-item {
     a {
-        text-decoration: none;
+        // text-decoration: none;
         color: #5a5a5a;
 
         &:hover {
